@@ -3,8 +3,17 @@
 using namespace std;
 
 int main(){
-    int A[6] = {1, 8, 22, 23, 53, 156}, x = 22;
-    int l = 0, r = 5, m = 6 / 2;
+    int n;
+    cout << "Enter the size: ";
+    cin >> n;
+    int *A = new int[n];
+    for (size_t i = 0; i < n; i++)
+    {
+        cout << "Enter element under the index " << i << ": ";
+        cin >> A[i];
+    }
+    int l = 0, r = n - 1, m = n / 2;
+    int x; cin >> x;
     
     while (l != r)
     {
@@ -18,8 +27,9 @@ int main(){
     }
     if (A[l] == x)
     {
-        cout <<  l;
+        cout << "Element " << x << " was found on the index " << l;
         return 0;
     }
     cout << "there is no such element as " << x;
+    delete[] A;
 }
