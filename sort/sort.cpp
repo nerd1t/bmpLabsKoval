@@ -8,6 +8,8 @@ void print(vector<int>, int);
 vector<int> merge(vector<int>, int, vector<int>, int);
 vector<int> merge_sort(vector<int>, int);
 
+int findK(vector<int>, vector<int>, int);
+
 int main() {
     cout << "Enter the number of segments: ";
     int a, b, n; cin >> n;
@@ -16,13 +18,21 @@ int main() {
     {
         cout << "Enter segment (a, b) №" << i << ": ";
         cin >> a >> b;
-        A[i] = min(a, b);
-        B[i] = max(a, b);
+        if (a < b) {
+            A[i] = a;
+            B[i] = b;
+        }
+        else {
+            A[i] = b;
+            B[i] = a;
+        }
     }
     A = merge_sort(A, n);
     B = merge_sort(B, n);
     print(A, n);
     print(B, n);
+    cout << "------\n";
+    cout << "The max K is " << findK(A, B, n);
 }
 
 void print(vector<int> A, int n) {
@@ -84,4 +94,22 @@ vector<int> merge_sort(vector<int> Array, int n) {
     A = merge_sort(A, sizeA);
     B = merge_sort(B, sizeB);
     return merge(A, sizeA, B, sizeB);
+}
+
+int findK(vector<int> A, vector<int> B, int n) {
+    size_t i = 0, j = 0, k = 0, max = 0;
+    while (i < n)
+    {
+        if (A[i] <= B[j])
+        {
+            k++;
+            if (max < k) max = k;
+            i++;       
+        }
+        else {
+            k--;
+            j++;
+        }
+    }
+    return max;
 }
