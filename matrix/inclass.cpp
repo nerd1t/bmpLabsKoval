@@ -50,7 +50,7 @@ void del(int** A, int row) {
     {
         delete[] A[i];
     }
-    
+    delete[] A;
 }
 
 void fill(int** A, int row, int col) {
